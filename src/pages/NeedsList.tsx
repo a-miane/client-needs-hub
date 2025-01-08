@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { PageNavigation } from "@/components/PageNavigation";
 
 type Need = {
   id: string;
@@ -62,6 +63,7 @@ const NeedsList = () => {
         description="Liste des besoins clients en cours"
       />
       <main className="container mx-auto px-4 py-8">
+        <PageNavigation />
         <Table>
           <TableHeader>
             <TableRow>

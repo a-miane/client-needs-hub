@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
+import { PageNavigation } from "@/components/PageNavigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -89,11 +90,10 @@ const NeedDetail = () => {
         description="Gestion et suivi du besoin client"
       />
       <main className="container mx-auto px-4 py-8 space-y-8">
+        <PageNavigation />
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Inform
-
-ations du besoin</CardTitle>
+            <CardTitle>Informations du besoin</CardTitle>
             <Button onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "Annuler" : "Modifier besoin"}
             </Button>

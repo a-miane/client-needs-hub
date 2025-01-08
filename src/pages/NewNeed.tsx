@@ -10,6 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { PageNavigation } from "@/components/PageNavigation";
 import {
   Select,
   SelectContent,
@@ -31,15 +32,15 @@ const NewNeed = () => {
     console.log({
       commercial: formData.get("commercial"),
       profile: formData.get("profile"),
+      mainTechnology1: formData.get("mainTechnology1"),
+      mainTechnology2: formData.get("mainTechnology2"),
+      secondaryTechnologies: formData.get("secondaryTechnologies"),
       description: formData.get("description"),
       startDate,
       budget: formData.get("budget"),
       decisionDate,
       location: formData.get("location"),
       remoteWork: formData.get("remoteWork"),
-      mainTechnology1: formData.get("mainTechnology1"),
-      mainTechnology2: formData.get("mainTechnology2"),
-      secondaryTechnologies: formData.get("secondaryTechnologies"),
       competition: formData.get("competition"),
     });
 
@@ -59,6 +60,7 @@ const NewNeed = () => {
       />
       
       <main className="container mx-auto px-4 py-8">
+        <PageNavigation />
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-8">
           <div className="space-y-4">
             <div>
@@ -88,13 +90,49 @@ const NewNeed = () => {
             </div>
 
             <div>
+              <label htmlFor="mainTechnology1" className="block text-sm font-medium text-gray-700">
+                Technologie principale 1 *
+              </label>
+              <Input
+                id="mainTechnology1"
+                name="mainTechnology1"
+                required
+                className="mt-1"
+                placeholder="Ex: React"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="mainTechnology2" className="block text-sm font-medium text-gray-700">
+                Technologie principale 2
+              </label>
+              <Input
+                id="mainTechnology2"
+                name="mainTechnology2"
+                className="mt-1"
+                placeholder="Ex: Node.js"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="secondaryTechnologies" className="block text-sm font-medium text-gray-700">
+                Technologies annexes
+              </label>
+              <Input
+                id="secondaryTechnologies"
+                name="secondaryTechnologies"
+                className="mt-1"
+                placeholder="Ex: Docker, AWS, etc."
+              />
+            </div>
+
+            <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                Descriptif mission *
+                Descriptif mission
               </label>
               <Textarea
                 id="description"
                 name="description"
-                required
                 className="mt-1"
                 placeholder="Décrivez la mission en détail"
                 rows={4}
@@ -121,6 +159,7 @@ const NewNeed = () => {
                     selected={startDate}
                     onSelect={setStartDate}
                     locale={fr}
+                    required
                   />
                 </PopoverContent>
               </Popover>
@@ -142,7 +181,7 @@ const NewNeed = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Date de décision *
+                Date de décision
               </label>
               <Popover>
                 <PopoverTrigger asChild>
@@ -195,51 +234,12 @@ const NewNeed = () => {
             </div>
 
             <div>
-              <label htmlFor="mainTechnology1" className="block text-sm font-medium text-gray-700">
-                Technologie principale 1 *
-              </label>
-              <Input
-                id="mainTechnology1"
-                name="mainTechnology1"
-                required
-                className="mt-1"
-                placeholder="Ex: React"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="mainTechnology2" className="block text-sm font-medium text-gray-700">
-                Technologie principale 2 *
-              </label>
-              <Input
-                id="mainTechnology2"
-                name="mainTechnology2"
-                required
-                className="mt-1"
-                placeholder="Ex: Node.js"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="secondaryTechnologies" className="block text-sm font-medium text-gray-700">
-                Technologies annexes
-              </label>
-              <Input
-                id="secondaryTechnologies"
-                name="secondaryTechnologies"
-                className="mt-1"
-                placeholder="Ex: Docker, AWS, etc."
-              />
-            </div>
-
-            <div>
               <label htmlFor="competition" className="block text-sm font-medium text-gray-700">
-                Concurrence *
+                Concurrence
               </label>
               <Textarea
                 id="competition"
                 name="competition"
-                required
                 className="mt-1"
                 placeholder="Listez les concurrents connus sur ce besoin"
                 rows={2}
