@@ -1,12 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useNavigate } from "react-router-dom";
+import { PageHeader } from "@/components/PageHeader";
+import { FeatureCard } from "@/components/FeatureCard";
+import { PlusCircle } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader 
+        title="Gestion des Besoins Clients" 
+        description="Plateforme de gestion des besoins clients pour votre ESN"
+      />
+      
+      <main className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <FeatureCard
+            title="Saisie nouveau besoin"
+            description="Créer une nouvelle demande client"
+            icon={PlusCircle}
+            onClick={() => navigate("/nouveau-besoin")}
+          />
+        </div>
+      </main>
     </div>
   );
 };
