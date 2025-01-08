@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { NeedEditForm } from "@/components/NeedEditForm";
 
 type Presentation = {
   id: string;
@@ -32,9 +33,10 @@ const NeedDetail = () => {
     date: "",
     consultant: "",
   });
+  const [isEditing, setIsEditing] = useState(false);
 
   // Simulation de données - à remplacer par des vraies données plus tard
-  const needData = {
+  const [needData, setNeedData] = useState({
     commercial: "Arthur",
     profile: "DevOps",
     description: "Mep CI/CD",
@@ -42,7 +44,12 @@ const NeedDetail = () => {
     budget: "650",
     decisionDate: new Date("2025-01-10"),
     competition: "CGI",
-  };
+    location: "Paris",
+    remoteWork: "hybrid",
+    mainTechnology1: "Docker",
+    mainTechnology2: "Kubernetes",
+    secondaryTechnologies: "AWS, Terraform",
+  });
 
   const handleAddPresentation = () => {
     if (newPresentation.date && newPresentation.consultant) {
@@ -70,6 +77,11 @@ const NeedDetail = () => {
     toast.success("Statut de la présentation mis à jour");
   };
 
+  const handleSaveNeed = (updatedNeed: any) => {
+    setNeedData(updatedNeed);
+    setIsEditing(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHeader
@@ -78,48 +90,83 @@ const NeedDetail = () => {
       />
       <main className="container mx-auto px-4 py-8 space-y-8">
         <Card>
-          <CardHeader>
-            <CardTitle>Informations du besoin</CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>Inform
+
+ations du besoin</CardTitle>
+            <Button onClick={() => setIsEditing(!isEditing)}>
+              {isEditing ? "Annuler" : "Modifier besoin"}
+            </Button>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label>Commercial</Label>
-                <Input value={needData.commercial} readOnly />
+          <CardContent>
+            {isEditing ? (
+              <NeedEditForm
+                need={needData}
+                onSave={handleSaveNeed}
+                onCancel={() => setIsEditing(false)}
+              />
+            ) : (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label>Commercial</Label>
+                    <Input value={needData.commercial} readOnly />
+                  </div>
+                  <div>
+                    <Label>Profil</Label>
+                    <Input value={needData.profile} readOnly />
+                  </div>
+                  <div>
+                    <Label>Description</Label>
+                    <Textarea value={needData.description} readOnly />
+                  </div>
+                  <div>
+                    <Label>Date de début</Label>
+                    <Input
+                      type="date"
+                      value={needData.startDate.toISOString().split("T")[0]}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <Label>Budget</Label>
+                    <Input value={needData.budget} readOnly />
+                  </div>
+                  <div>
+                    <Label>Date de décision</Label>
+                    <Input
+                      type="date"
+                      value={needData.decisionDate.toISOString().split("T")[0]}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <Label>Lieu</Label>
+                    <Input value={needData.location} readOnly />
+                  </div>
+                  <div>
+                    <Label>Télétravail</Label>
+                    <Input value={needData.remoteWork} readOnly />
+                  </div>
+                  <div>
+                    <Label>Technologie principale 1</Label>
+                    <Input value={needData.mainTechnology1} readOnly />
+                  </div>
+                  <div>
+                    <Label>Technologie principale 2</Label>
+                    <Input value={needData.mainTechnology2} readOnly />
+                  </div>
+                  <div>
+                    <Label>Technologies annexes</Label>
+                    <Input value={needData.secondaryTechnologies} readOnly />
+                  </div>
+                  <div>
+                    <Label>Concurrence</Label>
+                    <Input value={needData.competition} readOnly />
+                  </div>
+                </div>
               </div>
-              <div>
-                <Label>Profil</Label>
-                <Input value={needData.profile} readOnly />
-              </div>
-              <div>
-                <Label>Description</Label>
-                <Textarea value={needData.description} readOnly />
-              </div>
-              <div>
-                <Label>Date de début</Label>
-                <Input
-                  type="date"
-                  value={needData.startDate.toISOString().split("T")[0]}
-                  readOnly
-                />
-              </div>
-              <div>
-                <Label>Budget</Label>
-                <Input value={needData.budget} readOnly />
-              </div>
-              <div>
-                <Label>Date de décision</Label>
-                <Input
-                  type="date"
-                  value={needData.decisionDate.toISOString().split("T")[0]}
-                  readOnly
-                />
-              </div>
-              <div>
-                <Label>Concurrence</Label>
-                <Input value={needData.competition} readOnly />
-              </div>
-            </div>
+            )}
           </CardContent>
         </Card>
 

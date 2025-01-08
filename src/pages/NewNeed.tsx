@@ -10,6 +10,13 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const NewNeed = () => {
   const navigate = useNavigate();
@@ -21,7 +28,6 @@ const NewNeed = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
-    // Ici vous pourrez ajouter la logique pour sauvegarder les données
     console.log({
       commercial: formData.get("commercial"),
       profile: formData.get("profile"),
@@ -29,6 +35,11 @@ const NewNeed = () => {
       startDate,
       budget: formData.get("budget"),
       decisionDate,
+      location: formData.get("location"),
+      remoteWork: formData.get("remoteWork"),
+      mainTechnology1: formData.get("mainTechnology1"),
+      mainTechnology2: formData.get("mainTechnology2"),
+      secondaryTechnologies: formData.get("secondaryTechnologies"),
       competition: formData.get("competition"),
     });
 
@@ -152,6 +163,73 @@ const NewNeed = () => {
                   />
                 </PopoverContent>
               </Popover>
+            </div>
+
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                Lieu *
+              </label>
+              <Input
+                id="location"
+                name="location"
+                required
+                className="mt-1"
+                placeholder="Lieu de la mission"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="remoteWork" className="block text-sm font-medium text-gray-700">
+                Télétravail *
+              </label>
+              <Select name="remoteWork" required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sélectionner le rythme" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="full">100% télétravail</SelectItem>
+                  <SelectItem value="hybrid">Hybride</SelectItem>
+                  <SelectItem value="office">100% présentiel</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label htmlFor="mainTechnology1" className="block text-sm font-medium text-gray-700">
+                Technologie principale 1 *
+              </label>
+              <Input
+                id="mainTechnology1"
+                name="mainTechnology1"
+                required
+                className="mt-1"
+                placeholder="Ex: React"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="mainTechnology2" className="block text-sm font-medium text-gray-700">
+                Technologie principale 2 *
+              </label>
+              <Input
+                id="mainTechnology2"
+                name="mainTechnology2"
+                required
+                className="mt-1"
+                placeholder="Ex: Node.js"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="secondaryTechnologies" className="block text-sm font-medium text-gray-700">
+                Technologies annexes
+              </label>
+              <Input
+                id="secondaryTechnologies"
+                name="secondaryTechnologies"
+                className="mt-1"
+                placeholder="Ex: Docker, AWS, etc."
+              />
             </div>
 
             <div>
