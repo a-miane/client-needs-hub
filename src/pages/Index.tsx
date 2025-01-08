@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { FeatureCard } from "@/components/FeatureCard";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, ListChecks } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -20,6 +20,12 @@ const Index = () => {
             description="Créer une nouvelle demande client"
             icon={PlusCircle}
             onClick={() => navigate("/nouveau-besoin")}
+          />
+          <FeatureCard
+            title="Suivi des besoins"
+            description="Consulter et gérer les besoins en cours"
+            icon={ListChecks}
+            onClick={() => navigate("/suivi-besoins")}
           />
         </div>
       </main>
